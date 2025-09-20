@@ -137,6 +137,87 @@ app.get('/region-data', (req, res) => {
   res.json(regionalData)
 })
 
+// Get creative performance data by creative IDs
+// Example: POST http://localhost:3000/creative-data
+// Body: { "creativeIds": [101, 102, 201] }
+app.post('/creative-data', (req, res) => {
+  const { creativeIds } = req.body
+  
+  if (!creativeIds || !Array.isArray(creativeIds)) {
+    return res.status(400).json({
+      error: "Missing or invalid creative IDs",
+      message: "creativeIds must be provided as an array in the request body",
+      example: { "creativeIds": [101, 102, 201] }
+    })
+  }
+
+  if (creativeIds.length === 0) {
+    return res.status(400).json({
+      error: "Empty creative IDs array",
+      message: "Please provide at least one creative ID"
+    })
+  }
+
+  // Convert all creative IDs to numbers
+  const numericCreativeIds = creativeIds.map(id => {
+    const numericId = parseInt(id, 10)
+    if (isNaN(numericId)) {
+      return null
+    }
+    return numericId
+  }).filter(id => id !== null)
+
+  if (numericCreativeIds.length === 0) {
+    return res.status(400).json({
+      error: "Invalid creative IDs",
+      message: "All creative IDs must be valid numbers"
+    })
+  }
+
+  const data = JSON.parse(fs.readFileSync(__dirname + '/data/marketing-data.json', 'utf8'))
+  const creativePerformanceData = []
+  
+  // Search through all campaigns and their creatives
+  data.campaigns.forEach(campaign => {
+    if (campaign.creatives) {
+      campaign.creatives.forEach(creative => {
+        if (numericCreativeIds.includes(creative.id)) {
+          creativePerformanceData.push({
+            campaign_id: campaign.id,
+            campaign_name: campaign.name,
+            campaign_status: campaign.status,
+            campaign_medium: campaign.medium,
+            creative_id: creative.id,
+            creative_name: creative.name,
+            creative_format: creative.format,
+            creative_url: creative.url,
+            performance_score: creative.performance_score,
+            is_primary: creative.is_primary,
+            impressions: creative.impressions,
+            clicks: creative.clicks,
+            ctr: creative.ctr,
+            a_b_test_variant: creative.a_b_test_variant || null
+          })
+        }
+      })
+    }
+  })
+  
+  if (creativePerformanceData.length === 0) {
+    return res.status(404).json({
+      error: "No creatives found",
+      message: `No creatives found for the provided IDs: ${creativeIds.join(', ')}`
+    })
+  }
+  
+  res.json({
+    message: "Creative performance data retrieved successfully",
+    requested_ids: creativeIds,
+    found_creatives: creativePerformanceData.length,
+    data: creativePerformanceData
+  })
+})
+
 
 
 
@@ -230,6 +311,7 @@ app.get('/simple-protected-data', (req, res) => {
     })
   }
 })
+
 // DATA ACCESS VIA USER CREDENTIALS
 // ------------------------------------------------------------
 // Protected route that requires encrypted credentials
