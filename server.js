@@ -1,29 +1,46 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const morgan = require('morgan')
 const { simpleDecrypt } = require('./auth/decrypt.js')
 
 const app = express()
 const port = 3000
 
-// Create log file stream for Morgan
-const requestLogPath = path.join(__dirname, 'logging', 'request-log.txt')
-const requestLogStream = fs.createWriteStream(requestLogPath, { flags: 'a' })
 
-// Morgan logging middleware - logs all requests to file
-app.use(morgan('combined', { stream: requestLogStream }))
+
+
+
+
+// ============================================================
+
+
+// Request Logger
+const requestLogger = require('./logging/logger.js')
+
+// Use imported Morgan request logger
+app.use(requestLogger)
 
 // Middleware for parsing JSON and URL-encoded data
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+
+// ============================================================
+
+
+
 
 // Example: GET http://localhost:3000/
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+
+
+
 // ============================================================
+
+
 
 
 // DATA ACCESS BASIC
@@ -122,7 +139,12 @@ app.get('/region-data', (req, res) => {
 
 
 
+
+
 // ============================================================
+
+
+
 
 
 
@@ -308,6 +330,8 @@ app.get('/encrypted-protected-data', (req, res) => {
     })
   }
 })
+
+
 
 
 
