@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "ahmed_hassan",
+      "password": "hotlkhktpu123",
+      "email": "ahmed.hassan@amana.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "fatima_ali",
+      "password": "mhapthhktpu456",
+      "email": "fatima.ali@amana.com",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "username": "omar_mahmoud",
+      "password": "vthy789whzz",
+      "email": "omar.mahmoud@gmail.com",
+      "role": "user"
+    },
+    {
+      "id": 4,
+      "username": "layla_saeed",
+      "password": "shfsh321zljbyl",
+      "email": "layla.saeed@hotmail.com",
+      "role": "user"
+    },
+    {
+      "id": 5,
+      "username": "yusuf_khalil",
+      "password": "fbzbm654zljyla",
+      "email": "yusuf.khalil@yahoo.com",
+      "role": "user"
+    }
+  ],
+  "encryption_info": {
+    "method": "Caesar cipher",
+    "shift": 7,
+    "note": "Use simpleDecrypt() function from decrypt.js to decode passwords"
+  }
+}

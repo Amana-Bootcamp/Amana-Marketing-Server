@@ -1,0 +1,25 @@
+{
+  "name": "amana-marketing-server",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Amana-Bootcamp/Amana-Marketing-Server#readme",
+  "bugs": {
+    "url": "https://github.com/Amana-Bootcamp/Amana-Marketing-Server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amana-Bootcamp/Amana-Marketing-Server.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "\t",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}

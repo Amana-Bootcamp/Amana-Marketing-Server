@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "ahmed_hassan",
+      "password": "ahmedadmin123",
+      "email": "ahmed.hassan@amana.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "fatima_ali",
+      "password": "fatimaadmin456",
+      "email": "fatima.ali@amana.com",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "username": "omar_mahmoud",
+      "password": "omar789pass",
+      "email": "omar.mahmoud@gmail.com",
+      "role": "user"
+    },
+    {
+      "id": 4,
+      "username": "layla_saeed",
+      "password": "layla321secure",
+      "email": "layla.saeed@hotmail.com",
+      "role": "user"
+    },
+    {
+      "id": 5,
+      "username": "yusuf_khalil",
+      "password": "yusuf654secret",
+      "email": "yusuf.khalil@yahoo.com",
+      "role": "user"
+    }
+  ]
+}
